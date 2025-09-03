@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { exportMarkdown, exportDocx, exportPdf } from '../services/export';
-import { MarkdownIcon, WordIcon, PdfIcon, EditIcon, ViewIcon, SettingsIcon } from './icons';
+import { MarkdownIcon, WordIcon, PdfIcon, EditIcon, ViewIcon, SettingsIcon, CopyIcon } from './icons';
 
 interface PrdDisplayProps {
   content: string;
@@ -97,6 +97,20 @@ const PrdDisplay: React.FC<PrdDisplayProps> = ({ content, onReset }) => {
       <div className="flex flex-wrap items-center justify-between gap-4 mb-6 p-4 bg-dark-surface rounded-lg shadow-lg sticky top-0 z-10">
         <h2 className="text-2xl font-bold text-gray-100">Your Generated PRD</h2>
         <div className="flex flex-wrap items-center gap-2">
+          <button
+              onClick={handleCopy}
+              disabled={!!copySuccess}
+              className={`flex items-center gap-2 px-4 py-2 text-sm font-medium text-white rounded-md transition-all duration-200 ${
+              copySuccess === 'Copied!'
+                  ? 'bg-green-600'
+                  : copySuccess === 'Failed to copy'
+                  ? 'bg-red-600'
+                  : 'bg-gray-600 hover:bg-gray-700'
+              } disabled:cursor-not-allowed`}
+          >
+              <CopyIcon className="h-4 w-4" />
+              <span>{copySuccess || 'Copy'}</span>
+          </button>
            <button onClick={() => setIsEditing(!isEditing)} className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 rounded-md transition-colors">
             {isEditing ? <ViewIcon className="h-4 w-4" /> : <EditIcon className="h-4 w-4" />}
             {isEditing ? 'View' : 'Edit'}
