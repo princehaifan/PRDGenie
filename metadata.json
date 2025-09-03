@@ -1,0 +1,5 @@
+{
+  "name": "PRDGenie",
+  "description": "An AI-powered web app that converts raw app ideas (text, images, videos) into structured, detailed Product Requirement Documents (PRDs) with improved features and UX recommendations.",
+  "requestFramePermissions": []
+}
